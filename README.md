@@ -48,7 +48,8 @@ python -m pip install -r requirements.txt
 
 ### 3. Run a task
 
-Provide the path to an image on your computer:
+Provide the path to an image on your computer. The script displays the plot and
+saves a PNG to `outputs/task-01-matches.png` by default:
 
 ```bash
 python tasks/task_01_orb_feature_matching.py path/to/your/image.jpg
@@ -60,13 +61,16 @@ To customize the rotation and number of matches:
 python tasks/task_01_orb_feature_matching.py path/to/your/image.jpg --angle 30 --max-matches 50
 ```
 
-To save the visualization to a file:
+To choose a different output file:
 
 ```bash
-python tasks/task_01_orb_feature_matching.py path/to/your/image.jpg --output outputs/task-01-matches.png
+python tasks/task_01_orb_feature_matching.py path/to/your/image.jpg --output results/task-01-matches.png
 ```
 
-The output directory is created automatically when needed. The visualization is also displayed in a window.
+The output directory is created automatically when needed. The `outputs/`
+directory is ignored by Git so your input-derived images are not uploaded
+without your choice. Use a path such as `results/task-01-matches.png` when you
+want to keep and publish a particular visualization.
 
 ## Task 01 · ORB feature matching
 
@@ -80,6 +84,37 @@ The script follows these steps:
 
 If the image cannot be opened or ORB cannot find descriptors, the script prints an actionable error and exits instead of attempting an invalid match.
 
+### Recorded notebook output
+
+The supplied notebook's recorded run printed:
+
+```text
+Total matches found: 771
+Number of good matches selected: 100
+```
+
+These counts are from the notebook output shared with this project and are
+preserved in [`results/task-01-notebook-output.txt`](results/task-01-notebook-output.txt).
+The referenced source image was not included, so its exact match image cannot
+be reproduced from the repository alone. The generated-image demonstration
+below shows what the script produces.
+
+### Visual demonstration
+
+This example uses a locally generated geometric test image, not the missing
+notebook photo. The example input and the visualization produced by Task 1 are
+included in [`examples/`](examples/) so the result is visible on GitHub.
+
+![ORB feature matches between a generated image and its rotated copy](examples/demo-output.png)
+
+Running the task on this demo image found **653 matches** and drew the best
+**100**. The captured run output is in
+[`examples/demo-run-output.txt`](examples/demo-run-output.txt). Reproduce it with:
+
+```bash
+python tasks/task_01_orb_feature_matching.py examples/demo-input.png --output examples/demo-output.png
+```
+
 ### Options
 
 | Option | Default | Purpose |
@@ -87,7 +122,7 @@ If the image cannot be opened or ORB cannot find descriptors, the script prints 
 | `image` | Required | Input image path |
 | `--angle` | `45` | Rotation angle in degrees |
 | `--max-matches` | `100` | Maximum number of best matches to draw |
-| `--output` | None | Optional destination for the visualization |
+| `--output` | `outputs/task-01-matches.png` | Destination for the saved visualization |
 
 ## Project layout
 
@@ -95,7 +130,13 @@ If the image cannot be opened or ORB cannot find descriptors, the script prints 
 .
 ├── data/
 │   └── README.md
+├── examples/
+│   ├── demo-input.png
+│   ├── demo-output.png
+│   └── demo-run-output.txt
 ├── outputs/                         # Generated images (not tracked)
+├── results/
+│   └── task-01-notebook-output.txt
 ├── tasks/
 │   └── task_01_orb_feature_matching.py
 ├── .gitignore

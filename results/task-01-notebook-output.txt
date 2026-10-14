@@ -1,0 +1,7 @@
+Output captured from the supplied notebook run:
+
+Total matches found: 771
+Number of good matches selected: 100
+
+The notebook's referenced input image was not included with the shared files.
+Run the task with an image to generate a new match visualization.

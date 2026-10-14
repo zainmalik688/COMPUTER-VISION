@@ -1,0 +1,5 @@
+Demo run using the generated geometric test image:
+
+Total matches found: 653
+Matches displayed: 100
+Visualization saved to: examples\demo-output.png

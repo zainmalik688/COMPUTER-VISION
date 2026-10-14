@@ -29,7 +29,11 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--output",
         type=Path,
-        help="Optional path to save the match visualization",
+        default=Path("outputs/task-01-matches.png"),
+        help=(
+            "Path to save the match visualization "
+            "(default: outputs/task-01-matches.png)"
+        ),
     )
     return parser.parse_args()
 
@@ -84,10 +88,9 @@ def main() -> int:
     plt.axis("off")
     plt.tight_layout()
 
-    if args.output is not None:
-        args.output.parent.mkdir(parents=True, exist_ok=True)
-        plt.savefig(args.output, bbox_inches="tight")
-        print(f"Visualization saved to: {args.output}")
+    args.output.parent.mkdir(parents=True, exist_ok=True)
+    plt.savefig(args.output, bbox_inches="tight")
+    print(f"Visualization saved to: {args.output}")
 
     plt.show()
     return 0
